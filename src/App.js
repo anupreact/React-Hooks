@@ -18,9 +18,13 @@ import DocTitle2 from "./components/CustomHooks/DocTitle2";
 import HookCounter1 from "./components/HookCounter1";
 import HookCounter2 from "./components/HookCounter2";
 import UserForm from "./components/UserForm";
-
-
-
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import { Home } from "./Pages/Home";
+import { About } from "./Pages/About";
+import { Contact } from "./Pages/Contact";
+import { Services } from "./Pages/Services";
+import NeumorphForm from "./components/Neumorph/NeumorphForm";
 
 export const CountContext = createContext();
 
@@ -30,7 +34,6 @@ export const channelContext = createContext();
 const initialState = 0;
 
 function App() {
-
   const reducer = (state, action) => {
     switch (action) {
       case "Increment":
@@ -46,7 +49,7 @@ function App() {
   const [count, dispatch] = useReducer(reducer, initialState);
   return (
     <>
-    {/* <CountContext.Provider
+      {/* <CountContext.Provider
       value={{ countState: count, countDispatch: dispatch }}
     >
       <div className="App">
@@ -57,35 +60,48 @@ function App() {
       </div>
     </CountContext.Provider> */}
 
-    <div className="App">
-      {/* <DataFetching1/> data fetched using useState */}
-      {/* <DataFetching2/> data fetched using useReducer */}
-
+      <div className="App">
+      {/* <DataFetching1/> data fetched using useState
+      <DataFetching2/> data fetched using useReducer
 
       <ParentComponent/>
       <br />
 
-     {/* <UseMemoHook/> */}
+      <UseMemoHook/>
 
-     {/* <FocusInput/>
+      <FocusInput/>
 
 
      <TimerHook/>
 
      <DocTitle1/><br />
-     <DocTitle2/> */}
+     <DocTitle2/>
 
-
+      
      <br /><br />
 
      <HookCounter1/><br />
      <HookCounter2/> 
      <br />
 
-     <UserForm/>
-    </div>
-    </>
+     <UserForm/> */}
+      </div>
 
+      <BrowserRouter>
+        <Navbar />
+        <br />
+        <div className="pages">
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<NeumorphForm />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
 
